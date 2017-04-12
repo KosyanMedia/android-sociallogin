@@ -11,12 +11,11 @@ android {
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 }
 
 dependencies {
-    compile project (':library')
+    compile project (':sociallogin')
     compile "com.android.support:appcompat-v7:$supportLibVersion"
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
 }
