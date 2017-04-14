@@ -1,2 +1,5 @@
-include ':library'
-include ':sample'
+include ':sociallogin'
+include ':sociallogin-facebook'
+
+include ':sample-java'
+include ':sample-kotlin'
