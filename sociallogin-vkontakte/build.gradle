@@ -4,6 +4,7 @@ apply plugin: 'kotlin-android'
 dependencies {
     compile project (':sociallogin')
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    compile 'com.vk:androidsdk:1.6.7'
 }
 
 android {
