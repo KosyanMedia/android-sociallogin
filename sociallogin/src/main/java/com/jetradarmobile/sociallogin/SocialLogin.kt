@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentActivity
 
 class SocialLogin private constructor(activity: FragmentActivity) {
 
-    private val socialLoginFragment = SocialLoginFragment.from(activity.supportFragmentManager)
+    private val socialLoginFragment = SocialLoginFragment.from(activity.fragmentManager)
 
     companion object Factory {
         fun with(activity: FragmentActivity): SocialLogin {
