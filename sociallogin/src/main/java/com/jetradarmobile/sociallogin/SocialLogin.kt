@@ -17,8 +17,4 @@ class SocialLogin private constructor(activity: FragmentActivity) {
         socialLoginFragment.requestLogin(socialNetwork, socialLoginCallback)
         return this
     }
-
-    fun test (lambda: () -> Unit){
-        lambda()
-    }
 }
