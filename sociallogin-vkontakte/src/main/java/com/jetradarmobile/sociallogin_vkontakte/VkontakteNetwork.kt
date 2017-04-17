@@ -46,10 +46,8 @@ class VkontakteNetwork : SocialNetwork, VKCallback<VKAccessToken> {
     private fun createSocialToken(vkAccessToken: VKAccessToken?): SocialToken {
         return SocialToken(
                 token = vkAccessToken?.accessToken ?: "",
-                secret = vkAccessToken?.secret ?: "",
                 userId = vkAccessToken?.userId ?: "",
-                userName = "",
-                email = vkAccessToken?.email ?: ""
+                userName = ""
         )
     }
 }

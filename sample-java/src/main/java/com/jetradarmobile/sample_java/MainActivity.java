@@ -58,10 +58,8 @@ public class MainActivity extends AppCompatActivity implements
 
 	private void displayLoginInfo(SocialToken token) {
 		String info = "token = " + token.getToken() + "\n\n" +
-				"secret = " + token.getSecret() + "\n\n" +
 				"user id = " + token.getUserId() + "\n\n" +
-				"user name = " + token.getUserName() + "\n\n" +
-				"email = " + token.getEmail() + "\n\n";
+				"user name = " + token.getUserName() + "\n\n";
 
 		this.info.setText(info);
 	}

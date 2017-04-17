@@ -66,9 +66,7 @@ class FacebookNetwork : SocialNetwork, FacebookCallback<LoginResult> {
     private fun createSocialToken(accessToken: AccessToken, profile: Profile?): SocialToken {
         return SocialToken(
                 token = accessToken.token,
-                secret = "",
                 userId = accessToken.userId,
-                userName = profile?.name ?: "",
-                email = "")
+                userName = profile?.name ?: "")
     }
 }
