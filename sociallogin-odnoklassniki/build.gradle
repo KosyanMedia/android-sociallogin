@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 dependencies {
     compile project (':sociallogin')
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+
+    compile 'ru.ok:odnoklassniki-android-sdk:2.0.3'
 }
 
 android {
@@ -11,6 +13,6 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion 15
+        minSdkVersion rootProject.ext.minSdkVersion
     }
 }
