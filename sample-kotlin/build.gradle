@@ -19,6 +19,9 @@ dependencies {
     compile project (':sociallogin')
     compile project(path: ':sociallogin-facebook')
     compile project(path: ':sociallogin-vkontakte')
+    compile project(path: ':sociallogin-twitter')
+    compile project(path: ':sociallogin-odnoklassniki')
+    compile project(path: ':sociallogin-google')
     compile "com.android.support:appcompat-v7:$supportLibVersion"
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
 }

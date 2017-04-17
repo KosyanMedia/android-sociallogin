@@ -7,6 +7,9 @@ import com.jetradarmobile.sociallogin.SocialLoginCallback
 import com.jetradarmobile.sociallogin.SocialNetwork
 import com.jetradarmobile.sociallogin.SocialToken
 import com.jetradarmobile.sociallogin_facebook.FacebookNetwork
+import com.jetradarmobile.sociallogin_google.GoogleNetwork
+import com.jetradarmobile.sociallogin_odnoklassniki.OdnoklassnikiNetwork
+import com.jetradarmobile.sociallogin_twitter.TwitterNetwork
 import com.jetradarmobile.sociallogin_vkontakte.VkontakteNetwork
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -22,6 +25,18 @@ class MainActivity : AppCompatActivity(), SocialLoginCallback {
 
         vkontakteButton.setOnClickListener {
             SocialLogin.with(this).loginTo(VkontakteNetwork(), this)
+        }
+
+        twitterButton.setOnClickListener {
+            SocialLogin.with(this).loginTo(TwitterNetwork(), this)
+        }
+
+        odnoklassnikiButton.setOnClickListener {
+            SocialLogin.with(this).loginTo(OdnoklassnikiNetwork(), this)
+        }
+
+        googleButton.setOnClickListener {
+            SocialLogin.with(this).loginTo(GoogleNetwork(), this)
         }
     }
 

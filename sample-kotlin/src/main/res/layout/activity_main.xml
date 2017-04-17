@@ -1,30 +1,67 @@
-<LinearLayout
+<ScrollView
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	android:gravity="center_horizontal"
-	android:orientation="vertical"
-	android:padding="16dp">
+	android:layout_height="match_parent">
 
-	<TextView
-		android:id="@+id/info"
-		android:layout_gravity="center_horizontal"
-		android:layout_width="wrap_content"
+	<LinearLayout
+		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:text="Click on button to login"/>
+		android:gravity="center_horizontal"
+		android:orientation="vertical"
+		android:padding="16dp">
 
-	<Button
-		android:id="@+id/facebookButton"
-		android:layout_marginTop="24dp"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:text="Login with facebook"/>
+		<TextView
+			android:id="@+id/info"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_horizontal"
+			android:text="Click on button to login"/>
 
-	<Button
-		android:id="@+id/vkontakteButton"
-		android:layout_marginTop="8dp"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:text="Login with vkontakte"/>
+		<Button
+			android:id="@+id/facebookButton"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="24dp"
+			android:backgroundTint="#3B5998"
+			android:text="Login with facebook"
+			android:textColor="@android:color/white"/>
 
-</LinearLayout>
+		<Button
+			android:id="@+id/vkontakteButton"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="8dp"
+			android:backgroundTint="#45688E"
+			android:text="Login with vkontakte"
+			android:textColor="@android:color/white"/>
+
+		<Button
+			android:id="@+id/twitterButton"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="8dp"
+			android:backgroundTint="#4099FF"
+			android:text="Login with twitter"
+			android:textColor="@android:color/white"/>
+
+		<Button
+			android:id="@+id/odnoklassnikiButton"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="8dp"
+			android:backgroundTint="#ed812b"
+			android:text="Login with odnoklassniki"
+			android:textColor="@android:color/white"/>
+
+		<Button
+			android:id="@+id/googleButton"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="8dp"
+			android:backgroundTint="#ea4335"
+			android:text="Login with google"
+			android:textColor="@android:color/white"/>
+
+	</LinearLayout>
+
+</ScrollView>
