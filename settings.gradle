@@ -1,4 +1,5 @@
 include ':sociallogin'
+include ':sociallogin-odnoklassniki'
 include ':sociallogin-google'
 include ':sociallogin-twitter'
 include ':sociallogin-vkontakte'
