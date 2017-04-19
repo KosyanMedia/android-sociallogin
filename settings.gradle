@@ -1,4 +1,4 @@
-include ':sociallogin'
+include ':sociallogin', ':sociallogin-rx'
 include ':sociallogin-odnoklassniki'
 include ':sociallogin-google'
 include ':sociallogin-twitter'
