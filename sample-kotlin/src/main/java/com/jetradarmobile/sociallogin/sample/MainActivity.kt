@@ -41,9 +41,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun subscribe(observable: Observable<SocialToken>) {
-        observable.doOnNext { token -> showText(getTokenText(token)) }
-                .doOnError { error -> showText(error.message ?: "error") }
-                .subscribe()
+        observable.subscribe(
+                {token -> showText(getTokenText(token))},
+                {error -> showText(error.message?: "error")})
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
