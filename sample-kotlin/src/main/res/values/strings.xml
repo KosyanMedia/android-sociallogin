@@ -1,3 +1,11 @@
 <resources>
 	<string name="app_name">SocialLogin</string>
+	<string name="facebook_app_id">215219605631161</string>
+	<integer name="com_vk_sdk_AppId">5984293</integer>
+
+	<string name="sociallogin__twitter_app_id">xGl0VFXXpmg0ghOctQ7ljpouw</string>
+	<string name="sociallogin__twitter_app_secret">D7P50UUUMqkKEnT8Byf8UoRDLUyMLJXc3mwmLbuAb9xcfkOy0p</string>
+
+	<string name="sociallogin__ok_app_id">1250763520</string>
+	<string name="sociallogin__ok_app_public_key">CBAECOILEBABABABA</string>
 </resources>
