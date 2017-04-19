@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements
 	public void onClick(View v) {
 		switch (v.getId()) {
 			case R.id.facebookButton:
-				SocialLogin.Factory.with(this).loginTo(new FacebookNetwork(), this);
+				SocialLogin.Factory.getInstance().loginTo(this, new FacebookNetwork(), this);
 				break;
 			default:
 				break;
