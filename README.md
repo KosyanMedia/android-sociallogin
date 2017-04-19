@@ -40,9 +40,10 @@ Social login supports RxJava 2. For use social login in rx maner Just replace **
 
 ```Kotlin
 RxSocialLogin.instance.loginTo(this, /* Activity */ FacebookNetwork())
-      .doOnNext { token -> /* do somthing with token */ }
-      .doOnError { error -> /* handle error */ }
-      .subscribe()
+      .subscribe(
+        { token -> /* do somthing with token */ },
+        { error -> /* handle error */ }
+      )
 ```
 
 and in onActivityResult too
