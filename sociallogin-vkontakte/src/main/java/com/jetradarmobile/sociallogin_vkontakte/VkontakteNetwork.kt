@@ -9,15 +9,14 @@ import com.vk.sdk.VKAccessToken
 import com.vk.sdk.VKCallback
 import com.vk.sdk.VKSdk
 import com.vk.sdk.api.VKError
-import java.lang.ref.WeakReference
 
 
 class VkontakteNetwork : SocialNetwork, VKCallback<VKAccessToken> {
 
-    private var loginCallback: WeakReference<SocialLoginCallback>? = null
+    private var loginCallback: SocialLoginCallback? = null
 
     override fun login(activity: Activity, callback: SocialLoginCallback) {
-        loginCallback = WeakReference(callback)
+        loginCallback = callback
         VKSdk.login(activity, "access_token", "email")
     }
 
@@ -30,7 +29,7 @@ class VkontakteNetwork : SocialNetwork, VKCallback<VKAccessToken> {
     }
 
     override fun onResult(token: VKAccessToken?) {
-        loginCallback?.get()?.let {
+        loginCallback?.let {
             if (token != null) {
                 it.onLoginSuccess(this, createSocialToken(token))
             } else {
@@ -40,7 +39,7 @@ class VkontakteNetwork : SocialNetwork, VKCallback<VKAccessToken> {
     }
 
     override fun onError(error: VKError?) {
-        loginCallback?.get()?.onLoginError(this, error?.errorMessage ?: "Vkontakte authorization error")
+        loginCallback?.onLoginError(this, error?.errorMessage ?: "Vkontakte authorization error")
     }
 
     private fun createSocialToken(vkAccessToken: VKAccessToken?): SocialToken {

@@ -21,12 +21,12 @@ class GoogleNetwork : SocialNetwork,
         GoogleApiClient.ConnectionCallbacks {
 
     private lateinit var googleApiClient: GoogleApiClient
-    private var loginCallback: WeakReference<SocialLoginCallback>? = null
+    private var loginCallback: SocialLoginCallback? = null
 
     private val REQUEST_CODE = 0x0C1E
 
     override fun login(activity: Activity, callback: SocialLoginCallback) {
-        loginCallback = WeakReference(callback)
+        loginCallback = callback
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -56,15 +56,15 @@ class GoogleNetwork : SocialNetwork,
     private fun handleSignInResult(result: GoogleSignInResult) {
         googleApiClient.disconnect()
         if (!result.isSuccess) {
-            loginCallback?.get()?.onLoginError(this, "Google login error")
+            loginCallback?.onLoginError(this, "Google login error")
             return
         }
 
         val acct = result.signInAccount
         if (acct != null) {
-            loginCallback?.get()?.onLoginSuccess(this, createSocialToken(acct))
+            loginCallback?.onLoginSuccess(this, createSocialToken(acct))
         } else {
-            loginCallback?.get()?.onLoginError(this, "Google account receive error")
+            loginCallback?.onLoginError(this, "Google account receive error")
         }
     }
 
@@ -83,10 +83,10 @@ class GoogleNetwork : SocialNetwork,
 
     override fun onConnectionSuspended(cause: Int) {
         val error = CommonStatusCodes.getStatusCodeString(cause)
-        loginCallback?.get()?.onLoginError(this, error)
+        loginCallback?.onLoginError(this, error)
     }
 
     override fun onConnectionFailed(result: ConnectionResult) {
-        loginCallback?.get()?.onLoginError(this, result.errorMessage ?: "Google login connection error")
+        loginCallback?.onLoginError(this, result.errorMessage ?: "Google login connection error")
     }
 }

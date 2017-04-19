@@ -16,13 +16,14 @@ import java.lang.ref.WeakReference
 
 class OdnoklassnikiNetwork : SocialNetwork, OkListener {
 
-    private var loginCallback: WeakReference<SocialLoginCallback>? = null
+    private var loginCallback: SocialLoginCallback? = null
 
     private val APP_ID = "sociallogin__ok_app_id"
     private val PUBLIC_KEY = "sociallogin__ok_app_public_key"
+    private val REDIRECT_URL = "sociallogin__ok_redirect_url"
 
     override fun login(activity: Activity, callback: SocialLoginCallback) {
-        loginCallback = WeakReference(callback)
+        loginCallback = callback
 
         val appId = getStringResByName(activity, APP_ID)
         val appKey = getStringResByName(activity, PUBLIC_KEY)
@@ -31,7 +32,7 @@ class OdnoklassnikiNetwork : SocialNetwork, OkListener {
 
         okInstance.requestAuthorization(
                 activity,
-                "https://ok.ru",
+                REDIRECT_URL,
                 OkAuthType.ANY,
                 OkScope.VALUABLE_ACCESS,
                 OkScope.LONG_ACCESS_TOKEN)
@@ -46,11 +47,11 @@ class OdnoklassnikiNetwork : SocialNetwork, OkListener {
     }
 
     override fun onSuccess(json: JSONObject?) {
-        loginCallback?.get()?.onLoginSuccess(this, createSocialToken(json))
+        loginCallback?.onLoginSuccess(this, createSocialToken(json))
     }
 
     override fun onError(error: String?) {
-        loginCallback?.get()?.onLoginError(this, error?: "Odnoklassniki login error")
+        loginCallback?.onLoginError(this, error?: "Odnoklassniki login error")
     }
 
     private fun createSocialToken(json: JSONObject?): SocialToken {
