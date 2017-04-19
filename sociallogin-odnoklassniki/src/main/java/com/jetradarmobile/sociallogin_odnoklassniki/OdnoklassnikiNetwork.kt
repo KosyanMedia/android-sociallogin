@@ -11,7 +11,6 @@ import ru.ok.android.sdk.Odnoklassniki
 import ru.ok.android.sdk.OkListener
 import ru.ok.android.sdk.util.OkAuthType
 import ru.ok.android.sdk.util.OkScope
-import java.lang.ref.WeakReference
 
 
 class OdnoklassnikiNetwork : SocialNetwork, OkListener {
@@ -27,12 +26,13 @@ class OdnoklassnikiNetwork : SocialNetwork, OkListener {
 
         val appId = getStringResByName(activity, APP_ID)
         val appKey = getStringResByName(activity, PUBLIC_KEY)
+        val redirectUrl = getStringResByName(activity, REDIRECT_URL)
 
         val okInstance = Odnoklassniki.createInstance(activity, appId, appKey)
 
         okInstance.requestAuthorization(
                 activity,
-                REDIRECT_URL,
+                redirectUrl,
                 OkAuthType.ANY,
                 OkScope.VALUABLE_ACCESS,
                 OkScope.LONG_ACCESS_TOKEN)
