@@ -9,4 +9,5 @@ package com.jetradarmobile.sociallogin
  */
 data class SocialToken(val token: String,
                        val userId: String,
-                       val userName: String)
+                       val userName: String,
+                       val email: String)

@@ -1,11 +1,11 @@
 package com.jetradarmobile.sociallogin_facebook
 
+import android.app.Activity
 import android.content.Intent
 import com.facebook.*
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.jetradarmobile.sociallogin.SocialLoginCallback
-import com.jetradarmobile.sociallogin.SocialLoginFragment
 import com.jetradarmobile.sociallogin.SocialNetwork
 import com.jetradarmobile.sociallogin.SocialToken
 import java.lang.ref.WeakReference
@@ -16,19 +16,20 @@ class FacebookNetwork : SocialNetwork, FacebookCallback<LoginResult> {
     private var loginCallback: WeakReference<SocialLoginCallback>? = null
     private val callbackManager = CallbackManager.Factory.create()
 
-    override fun login(socialLoginFragment: SocialLoginFragment, callback: SocialLoginCallback) {
+    override fun login(activity: Activity, callback: SocialLoginCallback) {
         this.loginCallback = WeakReference(callback)
 
         LoginManager.getInstance().registerCallback(callbackManager, this)
 
         val permissions = mutableListOf<String>()
         permissions.add("public_profile")
+        permissions.add("email")
 
         val token = AccessToken.getCurrentAccessToken()
         val profile = Profile.getCurrentProfile()
 
         if (token == null) {
-            LoginManager.getInstance().logInWithReadPermissions(socialLoginFragment, permissions)
+            LoginManager.getInstance().logInWithReadPermissions(activity, permissions)
         } else {
             val socialToken = createSocialToken(token, profile)
             loginCallback?.get()?.onLoginSuccess(this, socialToken)
@@ -67,6 +68,7 @@ class FacebookNetwork : SocialNetwork, FacebookCallback<LoginResult> {
         return SocialToken(
                 token = accessToken.token,
                 userId = accessToken.userId,
-                userName = profile?.name ?: "")
+                userName = profile?.name ?: "",
+                email = "")
     }
 }

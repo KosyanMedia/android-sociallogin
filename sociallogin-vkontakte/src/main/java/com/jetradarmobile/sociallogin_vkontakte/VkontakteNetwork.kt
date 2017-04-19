@@ -1,8 +1,8 @@
 package com.jetradarmobile.sociallogin_vkontakte
 
+import android.app.Activity
 import android.content.Intent
 import com.jetradarmobile.sociallogin.SocialLoginCallback
-import com.jetradarmobile.sociallogin.SocialLoginFragment
 import com.jetradarmobile.sociallogin.SocialNetwork
 import com.jetradarmobile.sociallogin.SocialToken
 import com.vk.sdk.VKAccessToken
@@ -16,9 +16,9 @@ class VkontakteNetwork : SocialNetwork, VKCallback<VKAccessToken> {
 
     private var loginCallback: WeakReference<SocialLoginCallback>? = null
 
-    override fun login(socialLoginFragment: SocialLoginFragment, callback: SocialLoginCallback) {
+    override fun login(activity: Activity, callback: SocialLoginCallback) {
         loginCallback = WeakReference(callback)
-        VKSdk.login(socialLoginFragment, "access_token")
+        VKSdk.login(activity, "access_token", "email")
     }
 
     override fun logout() {
@@ -47,7 +47,8 @@ class VkontakteNetwork : SocialNetwork, VKCallback<VKAccessToken> {
         return SocialToken(
                 token = vkAccessToken?.accessToken ?: "",
                 userId = vkAccessToken?.userId ?: "",
-                userName = ""
+                userName = "",
+                email = vkAccessToken?.email ?: ""
         )
     }
 }
