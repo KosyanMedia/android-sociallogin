@@ -1,7 +1,6 @@
 package com.jetradarmobile.sociallogin_google
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import com.google.android.gms.auth.api.Auth
@@ -25,15 +24,11 @@ class GoogleNetwork : SocialNetwork,
     private var loginCallback: WeakReference<SocialLoginCallback>? = null
 
     private val REQUEST_CODE = 0x0C1E
-    private val SERVER_KEY = "sociallogin__google_server_client_key"
 
     override fun login(activity: Activity, callback: SocialLoginCallback) {
         loginCallback = WeakReference(callback)
 
-        val serverKey = getStringResByName(activity, SERVER_KEY)
-
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(serverKey)
                 .requestEmail()
                 .build()
 
@@ -75,8 +70,8 @@ class GoogleNetwork : SocialNetwork,
 
     private fun createSocialToken(account: GoogleSignInAccount): SocialToken {
         return SocialToken(
-                token = account.idToken ?: "",
-                userId = account.id ?: "",
+                token = account.id ?: "",
+                userId = "",
                 userName = account.displayName ?: "",
                 email = account.email ?: ""
         )
@@ -93,14 +88,5 @@ class GoogleNetwork : SocialNetwork,
 
     override fun onConnectionFailed(result: ConnectionResult) {
         loginCallback?.get()?.onLoginError(this, result.errorMessage ?: "Google login connection error")
-    }
-
-    private fun getStringResByName(ctx: Context, name: String): String {
-        val resId = ctx.resources.getIdentifier(name, "string", ctx.getPackageName())
-        try {
-            return ctx.resources.getString(resId)
-        } catch (e: Exception) {
-            return ""
-        }
     }
 }
