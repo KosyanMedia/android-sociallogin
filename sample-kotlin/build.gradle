@@ -16,12 +16,17 @@ android {
 }
 
 dependencies {
-    compile project (':sociallogin')
-    compile project(path: ':sociallogin-facebook')
-    compile project(path: ':sociallogin-vkontakte')
-    compile project(path: ':sociallogin-twitter')
-    compile project(path: ':sociallogin-odnoklassniki')
-    compile project(path: ':sociallogin-google')
+    compile project(':sociallogin')
+    compile project(':sociallogin-rx')
+    compile project(':sociallogin-facebook')
+    compile project(':sociallogin-vkontakte')
+    compile project(':sociallogin-twitter')
+    compile project(':sociallogin-odnoklassniki')
+    compile project(':sociallogin-google')
     compile "com.android.support:appcompat-v7:$supportLibVersion"
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+
+    compile 'com.google.android.gms:play-services-auth:10.2.1'
 }
+
+apply plugin: 'com.google.gms.google-services'
