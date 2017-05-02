@@ -44,3 +44,6 @@ captures/
 
 # Google Services (e.g. APIs or Firebase)
 google-services.json
+
+# Mac OS hidden files
+*.DS_Store
