@@ -1,7 +1,6 @@
 package com.jetradarmobile.sociallogin_odnoklassniki
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import com.jetradarmobile.sociallogin.SocialLoginCallback
 import com.jetradarmobile.sociallogin.SocialNetwork
@@ -13,20 +12,15 @@ import ru.ok.android.sdk.util.OkAuthType
 import ru.ok.android.sdk.util.OkScope
 
 
-class OdnoklassnikiNetwork : SocialNetwork, OkListener {
+class OdnoklassnikiNetwork(
+        val appId: String,
+        val appKey: String,
+        val redirectUrl: String) : SocialNetwork, OkListener {
 
     private var loginCallback: SocialLoginCallback? = null
 
-    private val APP_ID = "sociallogin__ok_app_id"
-    private val PUBLIC_KEY = "sociallogin__ok_app_public_key"
-    private val REDIRECT_URL = "sociallogin__ok_redirect_url"
-
     override fun login(activity: Activity, callback: SocialLoginCallback) {
         loginCallback = callback
-
-        val appId = getStringResByName(activity, APP_ID)
-        val appKey = getStringResByName(activity, PUBLIC_KEY)
-        val redirectUrl = getStringResByName(activity, REDIRECT_URL)
 
         val okInstance = Odnoklassniki.createInstance(activity, appId, appKey)
 
@@ -61,14 +55,5 @@ class OdnoklassnikiNetwork : SocialNetwork, OkListener {
                 userName = "",
                 email = ""
         )
-    }
-
-    private fun getStringResByName(ctx: Context, name: String): String {
-        val resId = ctx.resources.getIdentifier(name, "string", ctx.getPackageName())
-        try {
-            return ctx.resources.getString(resId)
-        } catch (e: Exception) {
-            return ""
-        }
     }
 }

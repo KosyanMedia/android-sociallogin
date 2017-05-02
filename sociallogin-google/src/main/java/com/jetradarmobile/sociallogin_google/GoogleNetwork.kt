@@ -15,7 +15,7 @@ import com.jetradarmobile.sociallogin.SocialNetwork
 import com.jetradarmobile.sociallogin.SocialToken
 
 
-class GoogleNetwork(val idToken: String? = null) : SocialNetwork,
+class GoogleNetwork(val idToken: String) : SocialNetwork,
         GoogleApiClient.OnConnectionFailedListener,
         GoogleApiClient.ConnectionCallbacks {
 
@@ -30,7 +30,7 @@ class GoogleNetwork(val idToken: String? = null) : SocialNetwork,
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestId()
                 .requestEmail()
-                .apply { idToken?.let { requestIdToken(it) } }
+                .requestIdToken(idToken)
                 .build()
 
         googleApiClient = GoogleApiClient.Builder(activity)

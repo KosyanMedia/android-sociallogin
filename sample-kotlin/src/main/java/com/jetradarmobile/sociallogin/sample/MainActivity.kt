@@ -28,15 +28,22 @@ class MainActivity : AppCompatActivity() {
         }
 
         twitterButton.setOnClickListener {
-            subscribe(RxSocialLogin.instance.loginTo(this, TwitterNetwork()))
+            subscribe(RxSocialLogin.instance.loginTo(this, TwitterNetwork(
+                    getString(R.string.twitter_app_id),
+                    getString(R.string.twitter_app_secret))))
         }
 
         odnoklassnikiButton.setOnClickListener {
-            subscribe(RxSocialLogin.instance.loginTo(this, OdnoklassnikiNetwork()))
+            subscribe(RxSocialLogin.instance.loginTo(this, OdnoklassnikiNetwork(
+                    getString(R.string.ok_app_id),
+                    getString(R.string.ok_app_public_key),
+                    getString(R.string.ok_redirect_url))))
         }
 
         googleButton.setOnClickListener {
-            subscribe(RxSocialLogin.instance.loginTo(this, GoogleNetwork()))
+            subscribe(RxSocialLogin.instance.loginTo(this, GoogleNetwork(
+                    getString(R.string.google_server_client_id)
+            )))
         }
     }
 
