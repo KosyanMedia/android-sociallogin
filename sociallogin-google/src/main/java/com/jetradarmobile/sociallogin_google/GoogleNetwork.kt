@@ -70,8 +70,8 @@ class GoogleNetwork : SocialNetwork,
 
     private fun createSocialToken(account: GoogleSignInAccount): SocialToken {
         return SocialToken(
-                token = account.id ?: "",
-                userId = "",
+                token = account.idToken ?: "",
+                userId = account.id ?: "",
                 userName = account.displayName ?: "",
                 email = account.email ?: ""
         )
