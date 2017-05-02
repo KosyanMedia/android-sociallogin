@@ -13,10 +13,9 @@ import com.google.android.gms.common.api.GoogleApiClient
 import com.jetradarmobile.sociallogin.SocialLoginCallback
 import com.jetradarmobile.sociallogin.SocialNetwork
 import com.jetradarmobile.sociallogin.SocialToken
-import java.lang.ref.WeakReference
 
 
-class GoogleNetwork : SocialNetwork,
+class GoogleNetwork(val idToken: String? = null) : SocialNetwork,
         GoogleApiClient.OnConnectionFailedListener,
         GoogleApiClient.ConnectionCallbacks {
 
@@ -29,7 +28,9 @@ class GoogleNetwork : SocialNetwork,
         loginCallback = callback
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestId()
                 .requestEmail()
+                .apply { idToken?.let { requestIdToken(it) } }
                 .build()
 
         googleApiClient = GoogleApiClient.Builder(activity)
