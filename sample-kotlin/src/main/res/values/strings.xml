@@ -1,11 +1,15 @@
 <resources>
 	<string name="app_name">SocialLogin</string>
-	<string name="facebook_app_id">215219605631161</string>
-	<integer name="com_vk_sdk_AppId">5984293</integer>
+	<string name="facebook_app_id">YOUR_FACEBOOK_APP_ID</string>
+	<integer name="com_vk_sdk_AppId">YOUR_VK_APP_ID</integer>
 
-	<string name="sociallogin__twitter_app_id">xGl0VFXXpmg0ghOctQ7ljpouw</string>
-	<string name="sociallogin__twitter_app_secret">D7P50UUUMqkKEnT8Byf8UoRDLUyMLJXc3mwmLbuAb9xcfkOy0p</string>
+	<string name="twitter_app_id">YOUR_TWITTER_APP_ID</string>
+	<string name="twitter_app_secret">YOUR_TWITTER_APP_SECRET</string>
 
-	<string name="sociallogin__ok_app_id">1250763520</string>
-	<string name="sociallogin__ok_app_public_key">CBAECOILEBABABABA</string>
+	<string name="ok_app_id">YOUR_OK_APP_ID</string>
+	<string name="ok_app_public_key">YOUR_OK_APP_KEY</string>
+	<string name="ok_redirect_url">okauth://okYOUR_OK_APP_ID</string>
+
+	<string name="google_server_client_id">YOUR_GOOGLE_SERVER_CLIENT_ID</string>
+
 </resources>
