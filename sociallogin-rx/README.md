@@ -18,7 +18,25 @@ dependencies {
 
 ## Setup
 
+Social login supports RxJava 2. For use social login in rx maner Just replace **SocialLogin** with **RxSocialLogin**
 
+```Kotlin
+RxSocialLogin.instance.loginTo(this, /* Activity */ FacebookNetwork())
+      .subscribe(
+        { token -> /* do somthing with token */ },
+        { error -> /* handle error */ }
+      )
+```
+
+and in onActivityResult too
+
+
+```Kotlin
+override fun onActivtyResult(requestCode: Int, resultCode: Int, data: Intent?) {
+  RxSocialLogin.instance.onActivityResult(requestCode, resultCode, data)
+  super.onActivityResult(requestCode, resultCode, data)
+}
+```
 
 
 [sociallogin-core]: https://github.com/KosyanMedia/android-sociallogin
