@@ -1,7 +1,23 @@
 # Social Login
 ### Library for authorizing in popular social networks
 
-## Import
+## Install
+
+Include jcenter to repositories inside project build.gradle file
+
+```Groovy
+repositories {
+    jcenter()
+}
+```
+
+Add following string to your module build.gradle file
+
+```Groovy
+dependencies {
+    compile 'com.jetradarmobile:andorid-sociallogin:1.0.0'
+}
+```
 
 ## Usage
 
