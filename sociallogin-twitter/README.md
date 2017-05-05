@@ -18,8 +18,15 @@ dependencies {
 
 ## Setup
 
-No special setup needed, just import lib and use as shown in [sample][sample-kotlin]
+Add following repository to your root project build.gradle file
 
+```Groovy
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+}
+```
+
+Use as shown in [sample][sample-kotlin]
 
 
 [sociallogin-core]: https://github.com/KosyanMedia/android-sociallogin
