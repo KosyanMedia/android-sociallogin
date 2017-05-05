@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'com.github.dcendents.android-maven'
-group = 'com.github.KosyanMedia.SocialLogin'
+group = 'com.github.KosyanMedia'
 
 dependencies {
     compile "com.android.support:appcompat-v7:$supportLibVersion"
