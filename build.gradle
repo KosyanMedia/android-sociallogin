@@ -2,7 +2,7 @@
 
 buildscript {
     project.ext{
-        kotlinVersion = '1.1.2-2'
+        kotlinVersion = '1.1.2-3'
     }
 
     repositories {
@@ -13,12 +13,19 @@ buildscript {
         classpath 'com.android.tools.build:gradle:2.3.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath 'com.google.gms:google-services:3.0.0'
+
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+
     }
 }
 
 allprojects {
     repositories {
         jcenter()
+        jcenter({url "http://jcenter.bintray.com/"})
+
+        mavenCentral()
+        mavenLocal()
         maven { url 'https://maven.fabric.io/public' }
     }
 }
@@ -34,3 +41,5 @@ ext {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+tasks.withType(Javadoc).all { enabled = false }

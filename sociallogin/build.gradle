@@ -1,5 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'com.github.dcendents.android-maven'
+group = 'com.github.tema-man'
 
 dependencies {
     compile "com.android.support:appcompat-v7:$supportLibVersion"
@@ -16,3 +18,4 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
     }
 }
+tasks.withType(Javadoc).all { enabled = false }
