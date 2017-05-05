@@ -4,7 +4,7 @@ This module depends on [SocialLogin core library][sociallogin-core]
 
 ```Groovy
 dependencies {
-    compile 'com.jetradarmobile:andorid-sociallogin:1.0.0'
+    compile 'com.github.KosyanMedia.android-sociallogin:sociallogin:1.0.0'
 }
 ```
 
@@ -12,7 +12,7 @@ dependencies {
 
 ```Groovy
 dependencies {
-    compile 'com.jetradarmobile:sociallogin-google:1.0.0'
+    compile 'com.github.KosyanMedia.android-sociallogin:sociallogin-google:1.0.0
 }
 ```
 

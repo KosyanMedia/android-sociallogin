@@ -3,21 +3,37 @@
 
 ## Install
 
-Include jcenter to repositories inside project build.gradle file
+Include jitpack to repositories inside your root build.gradle file
 
 ```Groovy
-repositories {
-    jcenter()
+allprojects {
+    repositories {
+        maven { url 'https://jitpack.io' }
+    }
 }
 ```
 
-Add following string to your module build.gradle file
+To include 'core' module add following string to your module build.gradle file
 
 ```Groovy
 dependencies {
-    compile 'com.jetradarmobile:andorid-sociallogin:1.0.0'
+    compile 'com.github.KosyanMedia.android-sociallogin:sociallogin:1.0.0'
 }
 ```
+
+Library is modular, you can include only those socials that you need. Just add appropriate
+dependency to build.gradle file. But remember, that each module depends of 'core' module
+
+For example if you need a facebook, you should add this line in build.gradle file
+
+```Groovy
+dependencies {
+    ...
+    compile 'com.github.KosyanMedia.android-sociallogin:sociallogin-facebook:1.0.0'
+}
+```
+
+For instructions see appropriate social network module.
 
 ## Usage
 
