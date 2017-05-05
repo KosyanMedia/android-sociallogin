@@ -22,10 +22,6 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
-        jcenter({url "http://jcenter.bintray.com/"})
-
-        mavenCentral()
-        mavenLocal()
         maven { url 'https://maven.fabric.io/public' }
     }
 }
