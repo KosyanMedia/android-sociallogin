@@ -1,3 +1,5 @@
+[![](https://jitpack.io/v/KosyanMedia/android-sociallogin.svg)](https://jitpack.io/#KosyanMedia/android-sociallogin)
+
 # Social Login
 ### Library for authorizing in popular social networks
 
