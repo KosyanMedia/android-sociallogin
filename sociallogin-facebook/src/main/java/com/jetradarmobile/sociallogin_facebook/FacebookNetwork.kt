@@ -64,11 +64,10 @@ class FacebookNetwork : SocialNetwork, FacebookCallback<LoginResult> {
         loginCallback?.get()?.onLoginError(this, error?.localizedMessage ?: "Facebook login error")
     }
 
-    private fun createSocialToken(accessToken: AccessToken, profile: Profile?): SocialToken {
-        return SocialToken(
-                token = accessToken.token,
-                userId = accessToken.userId,
-                userName = profile?.name ?: "",
-                email = "")
-    }
+    private fun createSocialToken(accessToken: AccessToken, profile: Profile?) = SocialToken(
+            token = accessToken.token,
+            userId = accessToken.userId,
+            userName = profile?.name ?: ""
+    )
+
 }

@@ -69,15 +69,6 @@ class GoogleNetwork(val idToken: String) : SocialNetwork,
         }
     }
 
-    private fun createSocialToken(account: GoogleSignInAccount): SocialToken {
-        return SocialToken(
-                token = account.idToken ?: "",
-                userId = account.id ?: "",
-                userName = account.displayName ?: "",
-                email = account.email ?: ""
-        )
-    }
-
     override fun onConnected(p0: Bundle?) {
 
     }
@@ -90,4 +81,12 @@ class GoogleNetwork(val idToken: String) : SocialNetwork,
     override fun onConnectionFailed(result: ConnectionResult) {
         loginCallback?.onLoginError(this, result.errorMessage ?: "Google login connection error")
     }
+
+    private fun createSocialToken(account: GoogleSignInAccount) = SocialToken(
+            token = account.idToken ?: "",
+            userId = account.id ?: "",
+            userName = account.displayName ?: "",
+            email = account.email ?: ""
+    )
+
 }

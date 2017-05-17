@@ -6,10 +6,10 @@ import android.support.v7.app.AppCompatActivity
 import com.jetradarmobile.sociallogin.SocialToken
 import com.jetradarmobile.sociallogin_facebook.FacebookNetwork
 import com.jetradarmobile.sociallogin_google.GoogleNetwork
-import com.jetradarmobile.sociallogin_odnoklassniki.OdnoklassnikiNetwork
+import com.jetradarmobile.sociallogin_odnoklassniki.OkNetwork
 import com.jetradarmobile.sociallogin_rx.RxSocialLogin
 import com.jetradarmobile.sociallogin_twitter.TwitterNetwork
-import com.jetradarmobile.sociallogin_vkontakte.VkontakteNetwork
+import com.jetradarmobile.sociallogin_vkontakte.VkNetwork
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         vkontakteButton.setOnClickListener {
-            subscribe(RxSocialLogin.instance.loginTo(this, VkontakteNetwork()))
+            subscribe(RxSocialLogin.instance.loginTo(this, VkNetwork()))
         }
 
         twitterButton.setOnClickListener {
@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         odnoklassnikiButton.setOnClickListener {
-            subscribe(RxSocialLogin.instance.loginTo(this, OdnoklassnikiNetwork(
+            subscribe(RxSocialLogin.instance.loginTo(this, OkNetwork(
                     getString(R.string.ok_app_id),
                     getString(R.string.ok_app_public_key),
                     getString(R.string.ok_redirect_url))))

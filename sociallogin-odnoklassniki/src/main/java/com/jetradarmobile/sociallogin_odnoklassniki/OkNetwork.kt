@@ -12,7 +12,7 @@ import ru.ok.android.sdk.util.OkAuthType
 import ru.ok.android.sdk.util.OkScope
 
 
-class OdnoklassnikiNetwork(
+class OkNetwork(
         val appId: String,
         val appKey: String,
         val redirectUrl: String) : SocialNetwork, OkListener {
@@ -45,15 +45,10 @@ class OdnoklassnikiNetwork(
     }
 
     override fun onError(error: String?) {
-        loginCallback?.onLoginError(this, error?: "Odnoklassniki login error")
+        loginCallback?.onLoginError(this, error ?: "Odnoklassniki login error")
     }
 
-    private fun createSocialToken(json: JSONObject?): SocialToken {
-        return SocialToken(
-                token = json?.getString("access_token") ?: "",
-                userId = "",
-                userName = "",
-                email = ""
-        )
-    }
+    private fun createSocialToken(json: JSONObject?)
+            = SocialToken(token = json?.getString("access_token") ?: "")
+
 }

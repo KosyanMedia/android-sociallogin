@@ -11,7 +11,7 @@ import com.vk.sdk.VKSdk
 import com.vk.sdk.api.VKError
 
 
-class VkontakteNetwork : SocialNetwork, VKCallback<VKAccessToken> {
+class VkNetwork : SocialNetwork, VKCallback<VKAccessToken> {
 
     private var loginCallback: SocialLoginCallback? = null
 
@@ -42,12 +42,9 @@ class VkontakteNetwork : SocialNetwork, VKCallback<VKAccessToken> {
         loginCallback?.onLoginError(this, error?.errorMessage ?: "Vkontakte authorization error")
     }
 
-    private fun createSocialToken(vkAccessToken: VKAccessToken?): SocialToken {
-        return SocialToken(
-                token = vkAccessToken?.accessToken ?: "",
-                userId = vkAccessToken?.userId ?: "",
-                userName = "",
-                email = vkAccessToken?.email ?: ""
-        )
-    }
+    private fun createSocialToken(vkAccessToken: VKAccessToken?) = SocialToken(
+            token = vkAccessToken?.accessToken ?: "",
+            userId = vkAccessToken?.userId ?: "",
+            email = vkAccessToken?.email ?: ""
+    )
 }

@@ -11,8 +11,8 @@ import com.twitter.sdk.android.core.identity.TwitterAuthClient
 import io.fabric.sdk.android.Fabric
 
 class TwitterNetwork(
-    val appId: String,
-    val appSecret: String) : Callback<TwitterSession>(), SocialNetwork {
+        val appId: String,
+        val appSecret: String) : Callback<TwitterSession>(), SocialNetwork {
 
     private lateinit var authClient: TwitterAuthClient
     private var loginCallback: SocialLoginCallback? = null
@@ -48,12 +48,11 @@ class TwitterNetwork(
         loginCallback?.onLoginError(this, exception?.message ?: "Twitter authorization error")
     }
 
-    private fun createSocialToken(session: TwitterSession?): SocialToken {
-        return SocialToken(
-                token = session?.authToken?.token ?: "",
-                userId = session?.userId?.toString() ?: "",
-                userName = session?.userName?: "",
-                email = ""
-        )
-    }
+    private fun createSocialToken(session: TwitterSession?) = SocialToken(
+            token = session?.authToken?.token ?: "",
+            secret = session?.authToken?.secret ?: "",
+            userId = session?.userId?.toString() ?: "",
+            userName = session?.userName ?: ""
+    )
+
 }
