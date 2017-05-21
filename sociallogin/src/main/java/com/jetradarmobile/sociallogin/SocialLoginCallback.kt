@@ -17,7 +17,7 @@ interface SocialLoginCallback {
      * Calls when some error occurred
      *
      * @param socialNetwork [SocialNetwork] implementation with which request was unsuccessful
-     * @param errorMessage [String] errorMessage message
+     * @param error [SocialLoginError] error a social login error
      */
-    fun onLoginError(socialNetwork: SocialNetwork, errorMessage: String)
+    fun onLoginError(socialNetwork: SocialNetwork, error: SocialLoginError)
 }

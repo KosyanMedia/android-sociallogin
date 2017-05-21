@@ -6,8 +6,6 @@ group = 'com.github.KosyanMedia'
 dependencies {
     compile "com.android.support:appcompat-v7:$supportLibVersion"
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
-
-    compile 'io.reactivex.rxjava2:rxjava:2.0.8'
 }
 
 android {

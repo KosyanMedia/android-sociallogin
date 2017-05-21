@@ -3,9 +3,11 @@ package com.jetradarmobile.sociallogin_rx
 import android.app.Activity
 import android.content.Intent
 import com.jetradarmobile.sociallogin.SocialLoginCallback
+import com.jetradarmobile.sociallogin.SocialLoginError
 import com.jetradarmobile.sociallogin.SocialNetwork
 import com.jetradarmobile.sociallogin.SocialToken
 import io.reactivex.Observable
+import io.reactivex.schedulers.Schedulers
 
 
 class RxSocialLogin {
@@ -22,20 +24,24 @@ class RxSocialLogin {
 
     fun loginTo(activity: Activity, socialNetwork: SocialNetwork): Observable<SocialToken> {
         this.socialNetwork = socialNetwork
-        return Observable.create { subscriber ->
+        val observable: Observable<SocialToken> = Observable.create { subscriber ->
 
             val callback = object : SocialLoginCallback {
+
                 override fun onLoginSuccess(socialNetwork: SocialNetwork, token: SocialToken) {
                     subscriber.onNext(token)
+                    subscriber.onComplete()
                 }
 
-                override fun onLoginError(socialNetwork: SocialNetwork, errorMessage: String) {
-                    subscriber.onError(Throwable(errorMessage))
+                override fun onLoginError(socialNetwork: SocialNetwork, error: SocialLoginError) {
+                    subscriber.onError(error)
                 }
             }
 
             this.socialNetwork.login(activity, callback)
         }
+
+        return observable.observeOn(Schedulers.io())
     }
 
     fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

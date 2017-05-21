@@ -3,6 +3,7 @@ package com.jetradarmobile.sociallogin_twitter
 import android.app.Activity
 import android.content.Intent
 import com.jetradarmobile.sociallogin.SocialLoginCallback
+import com.jetradarmobile.sociallogin.SocialLoginError
 import com.jetradarmobile.sociallogin.SocialNetwork
 import com.jetradarmobile.sociallogin.SocialToken
 import com.twitter.sdk.android.core.*
@@ -45,7 +46,8 @@ class TwitterNetwork(
     }
 
     override fun failure(exception: TwitterException?) {
-        loginCallback?.onLoginError(this, exception?.message ?: "Twitter authorization error")
+        loginCallback?.onLoginError(this,
+                SocialLoginError(exception?.message ?: "Twitter authorization error"))
     }
 
     private fun createSocialToken(session: TwitterSession?) = SocialToken(

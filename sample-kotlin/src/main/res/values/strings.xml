@@ -1,7 +1,7 @@
 <resources>
 	<string name="app_name">SocialLogin</string>
 	<string name="facebook_app_id">YOUR_FACEBOOK_APP_ID</string>
-	<integer name="com_vk_sdk_AppId">YOUR_VK_APP_ID</integer>
+	<integer name="com_vk_sdk_AppId">5000875</integer> <!--YOUR_VK_APP_ID</integer>-->
 
 	<string name="twitter_app_id">YOUR_TWITTER_APP_ID</string>
 	<string name="twitter_app_secret">YOUR_TWITTER_APP_SECRET</string>

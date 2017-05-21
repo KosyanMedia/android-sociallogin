@@ -11,6 +11,7 @@ import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.CommonStatusCodes
 import com.google.android.gms.common.api.GoogleApiClient
 import com.jetradarmobile.sociallogin.SocialLoginCallback
+import com.jetradarmobile.sociallogin.SocialLoginError
 import com.jetradarmobile.sociallogin.SocialNetwork
 import com.jetradarmobile.sociallogin.SocialToken
 
@@ -57,7 +58,7 @@ class GoogleNetwork(val idToken: String) : SocialNetwork,
     private fun handleSignInResult(result: GoogleSignInResult) {
         googleApiClient.disconnect()
         if (!result.isSuccess) {
-            loginCallback?.onLoginError(this, "Google login error")
+            loginCallback?.onLoginError(this, GoogleLoginError(SocialLoginError.Reason.CANCEL))
             return
         }
 
@@ -65,7 +66,7 @@ class GoogleNetwork(val idToken: String) : SocialNetwork,
         if (acct != null) {
             loginCallback?.onLoginSuccess(this, createSocialToken(acct))
         } else {
-            loginCallback?.onLoginError(this, "Google account receive error")
+            loginCallback?.onLoginError(this, GoogleLoginError(GoogleLoginError.NO_LOGIN))
         }
     }
 
@@ -75,11 +76,12 @@ class GoogleNetwork(val idToken: String) : SocialNetwork,
 
     override fun onConnectionSuspended(cause: Int) {
         val error = CommonStatusCodes.getStatusCodeString(cause)
-        loginCallback?.onLoginError(this, error)
+        loginCallback?.onLoginError(this, GoogleLoginError(error))
     }
 
     override fun onConnectionFailed(result: ConnectionResult) {
-        loginCallback?.onLoginError(this, result.errorMessage ?: "Google login connection error")
+        loginCallback?.onLoginError(this,
+                GoogleLoginError(result.errorMessage ?: "Google login connection error"))
     }
 
     private fun createSocialToken(account: GoogleSignInAccount) = SocialToken(

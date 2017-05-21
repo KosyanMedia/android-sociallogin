@@ -3,6 +3,7 @@ package com.jetradarmobile.sociallogin_vkontakte
 import android.app.Activity
 import android.content.Intent
 import com.jetradarmobile.sociallogin.SocialLoginCallback
+import com.jetradarmobile.sociallogin.SocialLoginError
 import com.jetradarmobile.sociallogin.SocialNetwork
 import com.jetradarmobile.sociallogin.SocialToken
 import com.vk.sdk.VKAccessToken
@@ -11,17 +12,17 @@ import com.vk.sdk.VKSdk
 import com.vk.sdk.api.VKError
 
 
-class VkNetwork : SocialNetwork, VKCallback<VKAccessToken> {
+class VkNetwork(val scope: List<String>) : SocialNetwork, VKCallback<VKAccessToken> {
 
     private var loginCallback: SocialLoginCallback? = null
 
     override fun login(activity: Activity, callback: SocialLoginCallback) {
         loginCallback = callback
-        VKSdk.login(activity, "access_token", "email")
+        VKSdk.login(activity, *scope.toTypedArray())
     }
 
     override fun logout() {
-
+        VKSdk.logout()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -33,13 +34,14 @@ class VkNetwork : SocialNetwork, VKCallback<VKAccessToken> {
             if (token != null) {
                 it.onLoginSuccess(this, createSocialToken(token))
             } else {
-                it.onLoginError(this, "Vkontakte token receiving error")
+                it.onLoginError(this, VkLoginError(VkLoginError.NO_LOGIN))
             }
         }
     }
 
     override fun onError(error: VKError?) {
-        loginCallback?.onLoginError(this, error?.errorMessage ?: "Vkontakte authorization error")
+        loginCallback?.onLoginError(this,
+                SocialLoginError(error?.errorMessage ?: "Vk authorization error"))
     }
 
     private fun createSocialToken(vkAccessToken: VKAccessToken?) = SocialToken(

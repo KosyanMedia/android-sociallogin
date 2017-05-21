@@ -3,19 +3,20 @@ package com.jetradarmobile.sociallogin_odnoklassniki
 import android.app.Activity
 import android.content.Intent
 import com.jetradarmobile.sociallogin.SocialLoginCallback
+import com.jetradarmobile.sociallogin.SocialLoginError
 import com.jetradarmobile.sociallogin.SocialNetwork
 import com.jetradarmobile.sociallogin.SocialToken
 import org.json.JSONObject
 import ru.ok.android.sdk.Odnoklassniki
 import ru.ok.android.sdk.OkListener
 import ru.ok.android.sdk.util.OkAuthType
-import ru.ok.android.sdk.util.OkScope
 
 
 class OkNetwork(
         val appId: String,
         val appKey: String,
-        val redirectUrl: String) : SocialNetwork, OkListener {
+        val redirectUrl: String,
+        val scope: List<String>) : SocialNetwork, OkListener {
 
     private var loginCallback: SocialLoginCallback? = null
 
@@ -28,8 +29,7 @@ class OkNetwork(
                 activity,
                 redirectUrl,
                 OkAuthType.ANY,
-                OkScope.VALUABLE_ACCESS,
-                OkScope.LONG_ACCESS_TOKEN)
+                *scope.toTypedArray())
     }
 
     override fun logout() {
@@ -45,7 +45,7 @@ class OkNetwork(
     }
 
     override fun onError(error: String?) {
-        loginCallback?.onLoginError(this, error ?: "Odnoklassniki login error")
+        loginCallback?.onLoginError(this, SocialLoginError(error ?: "Odnoklassniki login error"))
     }
 
     private fun createSocialToken(json: JSONObject?)

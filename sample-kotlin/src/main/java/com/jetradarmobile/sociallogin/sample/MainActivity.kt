@@ -12,6 +12,7 @@ import com.jetradarmobile.sociallogin_twitter.TwitterNetwork
 import com.jetradarmobile.sociallogin_vkontakte.VkNetwork
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity_main.*
+import ru.ok.android.sdk.util.OkScope
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,11 +21,19 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         facebookButton.setOnClickListener {
-            subscribe(RxSocialLogin.instance.loginTo(this, FacebookNetwork()))
+            val scope = mutableListOf<String>()
+            scope.add("public_profile")
+            scope.add("email")
+
+            subscribe(RxSocialLogin.instance.loginTo(this, FacebookNetwork(scope)))
         }
 
         vkontakteButton.setOnClickListener {
-            subscribe(RxSocialLogin.instance.loginTo(this, VkNetwork()))
+            val scope = mutableListOf<String>()
+            scope.add("access_token")
+            scope.add("email")
+
+            subscribe(RxSocialLogin.instance.loginTo(this, VkNetwork(scope)))
         }
 
         twitterButton.setOnClickListener {
@@ -34,10 +43,15 @@ class MainActivity : AppCompatActivity() {
         }
 
         odnoklassnikiButton.setOnClickListener {
+            val scope = mutableListOf<String>()
+            scope.add(OkScope.VALUABLE_ACCESS)
+            scope.add(OkScope.LONG_ACCESS_TOKEN)
+
             subscribe(RxSocialLogin.instance.loginTo(this, OkNetwork(
                     getString(R.string.ok_app_id),
                     getString(R.string.ok_app_public_key),
-                    getString(R.string.ok_redirect_url))))
+                    getString(R.string.ok_redirect_url),
+                    scope)))
         }
 
         googleButton.setOnClickListener {
@@ -49,8 +63,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun subscribe(observable: Observable<SocialToken>) {
         observable.subscribe(
-                {token -> showText(getTokenText(token))},
-                {error -> showText(error.message?: "error")})
+                { token -> showText(getTokenText(token)) },
+                { error -> showText(error.message ?: "error") })
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -62,10 +76,8 @@ class MainActivity : AppCompatActivity() {
         info.text = text
     }
 
-    private fun getTokenText(token: SocialToken): String {
-        return "token = ${token.token} \n\n" +
-                "user id = ${token.userId} \n\n" +
-                "user name = ${token.userName} \n\n" +
-                "email = ${token.email} \n\n"
-    }
+    private fun getTokenText(token: SocialToken) = "token = ${token.token} \n\n" +
+            "user id = ${token.userId} \n\n" +
+            "user name = ${token.userName} \n\n" +
+            "email = ${token.email} \n\n"
 }

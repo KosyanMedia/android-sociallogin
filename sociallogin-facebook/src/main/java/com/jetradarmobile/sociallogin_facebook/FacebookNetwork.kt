@@ -6,12 +6,13 @@ import com.facebook.*
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.jetradarmobile.sociallogin.SocialLoginCallback
+import com.jetradarmobile.sociallogin.SocialLoginError
 import com.jetradarmobile.sociallogin.SocialNetwork
 import com.jetradarmobile.sociallogin.SocialToken
 import java.lang.ref.WeakReference
 
 
-class FacebookNetwork : SocialNetwork, FacebookCallback<LoginResult> {
+class FacebookNetwork(val permissions: List<String>) : SocialNetwork, FacebookCallback<LoginResult> {
 
     private var loginCallback: WeakReference<SocialLoginCallback>? = null
     private val callbackManager = CallbackManager.Factory.create()
@@ -20,10 +21,6 @@ class FacebookNetwork : SocialNetwork, FacebookCallback<LoginResult> {
         this.loginCallback = WeakReference(callback)
 
         LoginManager.getInstance().registerCallback(callbackManager, this)
-
-        val permissions = mutableListOf<String>()
-        permissions.add("public_profile")
-        permissions.add("email")
 
         val token = AccessToken.getCurrentAccessToken()
         val profile = Profile.getCurrentProfile()
@@ -45,7 +42,7 @@ class FacebookNetwork : SocialNetwork, FacebookCallback<LoginResult> {
     }
 
     override fun onCancel() {
-        loginCallback?.get()?.onLoginError(this, "Facebook login request was cancelled")
+        loginCallback?.get()?.onLoginError(this, FacebookLoginError(SocialLoginError.Reason.CANCEL))
     }
 
     override fun onSuccess(result: LoginResult?) {
@@ -56,12 +53,13 @@ class FacebookNetwork : SocialNetwork, FacebookCallback<LoginResult> {
             val socialToken = createSocialToken(token, profile)
             loginCallback?.get()?.onLoginSuccess(this, socialToken)
         } else {
-            loginCallback?.get()?.onLoginError(this, "No facebook login token present")
+            loginCallback?.get()?.onLoginError(this, FacebookLoginError(FacebookLoginError.NO_LOGIN))
         }
     }
 
     override fun onError(error: FacebookException?) {
-        loginCallback?.get()?.onLoginError(this, error?.localizedMessage ?: "Facebook login error")
+        loginCallback?.get()?.onLoginError(this,
+                FacebookLoginError(error?.localizedMessage ?: "Facebook login error"))
     }
 
     private fun createSocialToken(accessToken: AccessToken, profile: Profile?) = SocialToken(
