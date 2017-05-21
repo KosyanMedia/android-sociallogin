@@ -19,7 +19,7 @@ To include 'core' module add following string to your module build.gradle file
 
 ```Groovy
 dependencies {
-    compile 'com.github.KosyanMedia.android-sociallogin:sociallogin:1.0.0'
+    compile 'com.github.KosyanMedia.android-sociallogin:sociallogin:1.1.0'
 }
 ```
 
@@ -31,7 +31,7 @@ For example if you need a facebook, you should add this line in build.gradle fil
 ```Groovy
 dependencies {
     ...
-    compile 'com.github.KosyanMedia.android-sociallogin:sociallogin-facebook:1.0.0'
+    compile 'com.github.KosyanMedia.android-sociallogin:sociallogin-facebook:1.1.0'
 }
 ```
 

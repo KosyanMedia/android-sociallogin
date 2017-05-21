@@ -4,7 +4,7 @@ This module depends on [SocialLogin core library][sociallogin-core]
 
 ```Groovy
 dependencies {
-    compile 'com.github.KosyanMedia.android-sociallogin:sociallogin:1.0.0'
+    compile 'com.github.KosyanMedia.android-sociallogin:sociallogin:1.1.0'
 }
 ```
 
@@ -12,7 +12,7 @@ dependencies {
 
 ```Groovy
 dependencies {
-    compile 'com.github.KosyanMedia.android-sociallogin:sociallogin-rx:1.0.0'
+    compile 'com.github.KosyanMedia.android-sociallogin:sociallogin-rx:1.1.0'
 }
 ```
 

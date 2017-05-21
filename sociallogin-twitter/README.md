@@ -12,7 +12,7 @@ dependencies {
 
 ```Groovy
 dependencies {
-    compile 'com.github.KosyanMedia.android-sociallogin:sociallogin-vkontakte:1.0.0'
+    compile 'com.github.KosyanMedia.android-sociallogin:sociallogin-vkontakte:1.1.0'
 }
 ```
 
