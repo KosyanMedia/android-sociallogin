@@ -19,9 +19,10 @@ To include 'core' module add following string to your module build.gradle file
 
 ```Groovy
 dependencies {
-    compile 'com.github.KosyanMedia.android-sociallogin:sociallogin:1.1.0'
+    compile 'com.github.KosyanMedia.android-sociallogin:sociallogin:x.y.z'
 }
 ```
+where ```x.y.z``` is the version of lib. You can find latest version in the badge on top of the page
 
 Library is modular, you can include only those socials that you need. Just add appropriate
 dependency to build.gradle file. But remember, that each module depends of 'core' module
@@ -31,9 +32,23 @@ For example if you need a facebook, you should add this line in build.gradle fil
 ```Groovy
 dependencies {
     ...
-    compile 'com.github.KosyanMedia.android-sociallogin:sociallogin-facebook:1.1.0'
+    compile 'com.github.KosyanMedia.android-sociallogin:facebook:x.y.z'
 }
 ```
+
+There is a list of modules:
+
+```Groovy
+compile 'com.github.KosyanMedia.android-sociallogin:facebook:x.y.z'
+compile 'com.github.KosyanMedia.android-sociallogin:google:x.y.z'
+compile 'com.github.KosyanMedia.android-sociallogin:odnoklassniki:x.y.z'
+compile 'com.github.KosyanMedia.android-sociallogin:rx:x.y.z'
+compile 'com.github.KosyanMedia.android-sociallogin:twitter:x.y.z'
+compile 'com.github.KosyanMedia.android-sociallogin:vkontakte:x.y.z'
+```
+
+If module you want is not present here, you can implement it by yourself
+Also you can contribute, by creating pull-requests =)
 
 For instructions see appropriate social network module.
 

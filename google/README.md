@@ -1,10 +1,12 @@
+[![](https://jitpack.io/v/KosyanMedia/android-sociallogin.svg)](https://jitpack.io/#KosyanMedia/android-sociallogin)
+
 # SocialLogin Google module
 
 This module depends on [SocialLogin core library][sociallogin-core]
 
 ```Groovy
 dependencies {
-    compile 'com.github.KosyanMedia.android-sociallogin:sociallogin:1.1.0'
+    compile 'com.github.KosyanMedia.android-sociallogin:sociallogin:x.y.z'
 }
 ```
 
@@ -12,7 +14,7 @@ dependencies {
 
 ```Groovy
 dependencies {
-    compile 'com.github.KosyanMedia.android-sociallogin:sociallogin-google:1.1.0
+    compile 'com.github.KosyanMedia.android-sociallogin:google:x.y.z'
 }
 ```
 

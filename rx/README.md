@@ -1,10 +1,12 @@
+[![](https://jitpack.io/v/KosyanMedia/android-sociallogin.svg)](https://jitpack.io/#KosyanMedia/android-sociallogin)
+
 # SocialLogin RxJava module
 
 This module depends on [SocialLogin core library][sociallogin-core]
 
 ```Groovy
 dependencies {
-    compile 'com.github.KosyanMedia.android-sociallogin:sociallogin:1.1.0'
+    compile 'com.github.KosyanMedia.android-sociallogin:sociallogin:x.y.z'
 }
 ```
 
@@ -12,7 +14,7 @@ dependencies {
 
 ```Groovy
 dependencies {
-    compile 'com.github.KosyanMedia.android-sociallogin:sociallogin-rx:1.1.0'
+    compile 'com.github.KosyanMedia.android-sociallogin:rx:x.y.z'
 }
 ```
 
@@ -33,8 +35,8 @@ and in onActivityResult too
 
 ```Kotlin
 override fun onActivtyResult(requestCode: Int, resultCode: Int, data: Intent?) {
-  RxSocialLogin.instance.onActivityResult(requestCode, resultCode, data)
   super.onActivityResult(requestCode, resultCode, data)
+  RxSocialLogin.instance.onActivityResult(requestCode, resultCode, data)
 }
 ```
 
