@@ -22,10 +22,7 @@ dependencies {
     compile project(':twitter')
     compile project(':odnoklassniki')
     compile project(':google')
-
-    compile project(':facebook'){
-        exclude module: 'appcompat-v7'
-    }
+    compile project(':facebook')
 
     compile "com.android.support:appcompat-v7:$supportLibVersion"
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
