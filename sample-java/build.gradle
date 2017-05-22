@@ -16,5 +16,5 @@ android {
 dependencies {
     compile project (':sociallogin')
     compile "com.android.support:appcompat-v7:$supportLibVersion"
-    compile project(path: ':sociallogin-facebook')
+    compile project(path: ':facebook')
 }

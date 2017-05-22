@@ -12,7 +12,7 @@ import com.jetradarmobile.sociallogin.SocialLogin;
 import com.jetradarmobile.sociallogin.SocialLoginCallback;
 import com.jetradarmobile.sociallogin.SocialNetwork;
 import com.jetradarmobile.sociallogin.SocialToken;
-import com.jetradarmobile.sociallogin_facebook.FacebookNetwork;
+import com.jetradarmobile.sociallogin.facebook.FacebookNetwork;
 
 import org.jetbrains.annotations.NotNull;
 
