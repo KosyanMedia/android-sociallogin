@@ -8,10 +8,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.auth.api.signin.GoogleSignInResult
 import com.google.android.gms.common.ConnectionResult
-import com.google.android.gms.common.api.CommonStatusCodes
 import com.google.android.gms.common.api.GoogleApiClient
 import com.jetradarmobile.sociallogin.SocialLoginCallback
-import com.jetradarmobile.sociallogin.SocialLoginError
 import com.jetradarmobile.sociallogin.SocialNetwork
 import com.jetradarmobile.sociallogin.SocialToken
 
@@ -57,16 +55,15 @@ class GoogleNetwork(val idToken: String) : SocialNetwork,
 
     private fun handleSignInResult(result: GoogleSignInResult) {
         googleApiClient.disconnect()
-        if (!result.isSuccess) {
-            loginCallback?.onLoginError(this, GoogleLoginError(SocialLoginError.Reason.CANCEL))
-            return
-        }
-
-        val acct = result.signInAccount
-        if (acct != null) {
-            loginCallback?.onLoginSuccess(this, createSocialToken(acct))
+        if (result.isSuccess) {
+            val account = result.signInAccount
+            if (account != null) {
+                loginCallback?.onLoginSuccess(this, createSocialToken(account))
+            } else {
+                loginCallback?.onLoginError(this, GoogleLoginError(GoogleLoginError.NO_LOGIN))
+            }
         } else {
-            loginCallback?.onLoginError(this, GoogleLoginError(GoogleLoginError.NO_LOGIN))
+            handleError(result.status.statusCode)
         }
     }
 
@@ -75,13 +72,16 @@ class GoogleNetwork(val idToken: String) : SocialNetwork,
     }
 
     override fun onConnectionSuspended(cause: Int) {
-        val error = CommonStatusCodes.getStatusCodeString(cause)
-        loginCallback?.onLoginError(this, GoogleLoginError(error))
+        handleError(cause)
     }
 
     override fun onConnectionFailed(result: ConnectionResult) {
         loginCallback?.onLoginError(this,
                 GoogleLoginError(result.errorMessage ?: "Google login connection error"))
+    }
+
+    private fun handleError(cause: Int) {
+        loginCallback?.onLoginError(this, GoogleLoginError.byCode(cause))
     }
 
     private fun createSocialToken(account: GoogleSignInAccount) = SocialToken(
