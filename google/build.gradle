@@ -7,7 +7,7 @@ dependencies {
     compile project (':sociallogin')
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
 
-    compile 'com.google.android.gms:play-services-auth:10.2.1'
+    compile 'com.google.android.gms:play-services-auth:10.2.6'
 }
 
 android {
@@ -17,4 +17,9 @@ android {
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
     }
+}
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
 }
