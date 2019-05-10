@@ -14,11 +14,11 @@ import java.lang.ref.WeakReference
 
 class FacebookNetwork(val permissions: List<String>) : SocialNetwork, FacebookCallback<LoginResult> {
 
-    private var loginCallback: WeakReference<SocialLoginCallback>? = null
+    private var loginCallback: SocialLoginCallback? = null
     private val callbackManager = CallbackManager.Factory.create()
 
     override fun login(activity: Activity, callback: SocialLoginCallback) {
-        this.loginCallback = WeakReference(callback)
+        this.loginCallback = callback
 
         LoginManager.getInstance().registerCallback(callbackManager, this)
 
@@ -29,7 +29,7 @@ class FacebookNetwork(val permissions: List<String>) : SocialNetwork, FacebookCa
             LoginManager.getInstance().logInWithReadPermissions(activity, permissions)
         } else {
             val socialToken = createSocialToken(token, profile)
-            loginCallback?.get()?.onLoginSuccess(this, socialToken)
+            loginCallback?.onLoginSuccess(this, socialToken)
         }
     }
 
@@ -42,7 +42,7 @@ class FacebookNetwork(val permissions: List<String>) : SocialNetwork, FacebookCa
     }
 
     override fun onCancel() {
-        loginCallback?.get()?.onLoginError(this, FacebookLoginError(SocialLoginError.Reason.CANCEL))
+        loginCallback?.onLoginError(this, FacebookLoginError(SocialLoginError.Reason.CANCEL))
     }
 
     override fun onSuccess(result: LoginResult?) {
@@ -51,14 +51,14 @@ class FacebookNetwork(val permissions: List<String>) : SocialNetwork, FacebookCa
 
         if (token != null) {
             val socialToken = createSocialToken(token, profile)
-            loginCallback?.get()?.onLoginSuccess(this, socialToken)
+            loginCallback?.onLoginSuccess(this, socialToken)
         } else {
-            loginCallback?.get()?.onLoginError(this, FacebookLoginError(FacebookLoginError.NO_LOGIN))
+            loginCallback?.onLoginError(this, FacebookLoginError(FacebookLoginError.NO_LOGIN))
         }
     }
 
     override fun onError(error: FacebookException?) {
-        loginCallback?.get()?.onLoginError(this,
+        loginCallback?.onLoginError(this,
                 FacebookLoginError(error?.localizedMessage ?: "Facebook login error"))
     }
 
